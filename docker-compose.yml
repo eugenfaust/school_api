@@ -1,0 +1,39 @@
+services:
+  api:
+    build: app
+    container_name: school_api
+    volumes:
+      - .:/usr/src/fastapi
+      - /root/school/docs:/api/docs
+    ports:
+      - 3666:80
+    depends_on:
+      - pgdb
+  tg:
+    container_name: school_tg
+    build:
+      context: app
+      dockerfile: Dockerfile_tg
+    depends_on:
+      - pgdb
+
+  pgdb:
+    image: postgres # name of image from dockerhub
+    container_name: school_db
+    environment:
+      - POSTGRES_DB=cooldb
+      - POSTGRES_USER=cooluser
+      - POSTGRES_PASSWORD=coolpass
+    volumes:
+      - pgdata:/var/lib/postgresql/data/
+
+  front:
+    container_name: school_front
+    build: front
+    ports:
+      - 3667:3000
+    depends_on:
+      - api
+volumes:
+  pgdata: null
+

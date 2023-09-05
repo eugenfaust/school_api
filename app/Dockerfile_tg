@@ -1,0 +1,16 @@
+#
+FROM python:3.10
+
+#
+WORKDIR /tg
+
+#
+COPY ./requirements.txt /tg/requirements.txt
+COPY ./.env /tg/.env
+#
+RUN pip install --no-cache-dir --upgrade -r /tg/requirements.txt
+
+#
+COPY . /tg
+#
+CMD ["python3", "bot_polling.py"]
