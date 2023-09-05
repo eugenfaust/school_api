@@ -52,20 +52,6 @@ async def check_schedules(bot):
                 s.tg_notified = True
         db.commit()
 
-@dp.callback_query()
-async def clb_game(clb: CallbackQuery):
-    await clb.answer(url="https://eugenfaust.github.io/react-slots/")
-
-@dp.message(Command('test'))
-async def command_test(message: Message):
-    builder = InlineKeyboardBuilder()
-    url = "https://eugenfaust.github.io/react-slots/"
-
-    builder.button(text="Slots!", web_app=WebAppInfo(url=url))
-    await message.answer("Test",
-                         reply_markup=builder.as_markup())
-    await message.answer_game('JockerSloots')
-
 
 @dp.message(CommandStart())
 async def command_start_handler(message: Message) -> None:
