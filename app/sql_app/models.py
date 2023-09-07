@@ -2,7 +2,7 @@ import random
 import string
 from typing import List
 
-from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, DateTime, func, ARRAY, BigInteger
+from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, DateTime, func, ARRAY, BigInteger, DECIMAL
 from sqlalchemy.orm import relationship, Mapped, mapped_column, backref
 
 from .database import Base
@@ -25,6 +25,8 @@ class User(Base):
     is_active = Column(Boolean, default=True)
     created = Column(DateTime(timezone=True), server_default=func.now())
     is_super = Column(Boolean, default=False)
+    balance = Column(DECIMAL(), default=0)
+    lesson_price = Column(DECIMAL(), default=500)
 
 
 class Schedule(Base):

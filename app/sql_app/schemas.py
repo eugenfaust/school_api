@@ -1,3 +1,4 @@
+import decimal
 from datetime import datetime
 
 from pydantic import BaseModel
@@ -22,6 +23,8 @@ class UserUpdate(UserBase):
     id: int
     full_name: str = None
     username: str = None
+    lesson_price: decimal.Decimal = None
+    balance: decimal.Decimal = None
     password: str = None
 
 
@@ -32,6 +35,8 @@ class User(UserBase):
     username: str
     tg_hash: str
     is_super: bool
+    lesson_price: decimal.Decimal
+    balance: decimal.Decimal
     full_name: str | None
     created: datetime
 

@@ -63,6 +63,10 @@ def update_user(db: Session, user: schemas.UserUpdate):
             db_user.full_name = user.full_name
         if user.username:
             db_user.username = user.username
+        if user.balance:
+            db_user.balance = user.balance
+        if user.lesson_price:
+            db_user.lesson_price = user.lesson_price
         if user.password:
             pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
             hashed_password = pwd_context.hash(user.password)
